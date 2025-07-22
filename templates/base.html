@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body style="text: white">
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background-color: #000000;">
+        {% if request.user.is_anonymous %}
+        <nav>
+            <ul style="list-style: none; display: flex; gap: 30px; margin: 0; padding: 0;">
+                <li><strong>SINEKYS</strong></li>
+                <li><a href="{% url 'goals' %}">Nuestros objetivos</a></li>
+                <li><a href="{% url 'about' %}">Sobre nosotros</a></li>
+                <li><a href="{% url 'how_does_it_work' %}">¿Cómo funciona?</a></li>
+            </ul>
+        </nav>
+        
+        <div style="display: flex; gap: 15px;">
+            <p><a href="{% url 'account_login' %}" style="text-decoration: none;">Iniciar sesión</a></p>
+            <p><a href="{% url 'account_signup' %}" style="text-decoration: none;">Registrarse</a></p>
+        {% else %}
+            <ul style="list-style: none; display: flex; gap: 30px; margin: 0; padding: 0;">
+                <li><strong>SINEKYS</strong></li>
+                <li><a href="{% url 'goals' %}">Perfil</a></li>
+                <li><a href="{% url 'about' %}">Progreso</a></li>
+                <li><a href="{% url 'how_does_it_work' %}">Prueba de diagnóstico</a></li>
+            </ul>
+            <p>Bienvenid@, {{ request.user.username }}!</p>
+            <p><a href="{% url 'account_logout' %}">Cerrar sesión</a></p>
+        </div>
+            {% endif %}
+        
+        
+
+        
+    </header>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
