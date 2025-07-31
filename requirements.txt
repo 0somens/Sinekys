@@ -16,3 +16,8 @@ requests-oauthlib==2.0.0
 sqlparse==0.5.3
 tzdata==2025.2
 urllib3==2.5.0
+
+# Para crear el requiremts.txt se usa el comando:
+# pip freeze > requirements.txt
+# Para instalar las dependencias se usa:
+# pip install -r requirements.txt

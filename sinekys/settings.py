@@ -35,6 +35,7 @@ INSTALLED_APPS = [
 # Sinekys Apps
     'accounts',
     'core', 
+    'ejercicios',
 
 # AllAuth
     'allauth',
@@ -208,6 +209,7 @@ ACCOUNT_USERNAME_BLACKLIST = [
 ]
 
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
 
