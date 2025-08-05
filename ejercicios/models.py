@@ -5,7 +5,6 @@ from django.utils.translation import gettext_lazy as _
 from accounts.models import AbstractBaseModel, Estudiante
 
 
-
 class AbstractResultado(models.Model):
     es_correcto = models.BooleanField(verbose_name="¿Es correcto?")
     puntos = models.FloatField(

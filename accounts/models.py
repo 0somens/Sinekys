@@ -1,8 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
+from django.core import validators
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
+
+
 class CustomUserManager(BaseUserManager):
     use_in_migrations = True
 
@@ -19,8 +22,26 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         return self.create_user(email, password, **extra_fields)
+    
 class CustomUser(AbstractUser):
-    username = None  # Se elimina el campo username para usar solo email
+    username = models.CharField(
+        _('Nombre de usuario'),
+        max_length=50,
+        unique=True,
+        help_text=_('Requerido. 50 caracteres o menos. Letras, números y @/./+/-/_ solamente.'),
+        validators=[
+            validators.RegexValidator(
+                r'^[\w.@+-]+$',
+                _('Ingrese un nombre de usuario válido. Este valor solo puede contener letras, números y @/./+/-/_ caracteres.'),
+                'invalid'
+            ),
+        ],
+        error_messages={
+            'unique': _("Ya existe un usuario con este nombre de usuario."),
+        },
+        
+    )
+    
     email = models.EmailField(_('Correo electrónico'), unique=True)
     first_name = models.CharField(_('nombre'), max_length=150)
     last_name = models.CharField(_('apellido'), max_length=150)
@@ -28,7 +49,7 @@ class CustomUser(AbstractUser):
     rol = models.ForeignKey('Rol', on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Rol")
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username','first_name','last_name']
 
     objects = CustomUserManager()
 

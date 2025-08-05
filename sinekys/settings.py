@@ -193,7 +193,7 @@ LOGIN_REDIRECT_URL = '/'
 # ACCOUNT_AUTHENTICATION_METHOD = 'email' #'username_email' # It says its deprecated...
 ACCOUNT_LOGIN_METHODS = {'email'}  # 'username_email' or 'email'
 # ACCOUNT_EMAIL_REQUIRED = True # Its says its deprecated...
-ACCOUNT_SIGNUP_FIELDS = ['email*','username','password1','password2',]  # Add career
+ACCOUNT_SIGNUP_FIELDS = ['email*','password1','password2']  
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # 'mandatory' or 'optional'
 ACCOUNT_MAX_EMAIL_ADDRESSES = 3
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True #2FA email
@@ -208,9 +208,6 @@ ACCOUNT_USERNAME_BLACKLIST = [
     'root',
 ]
 
-
 AUTH_USER_MODEL = 'accounts.CustomUser'
-
-
-
-
+AUTH_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.CustomSignupForm'
