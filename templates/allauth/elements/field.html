@@ -1,0 +1,8 @@
+<div style="background: #111; color: #0f0; padding: 10px;">
+  DEBUG campos en form:
+  {% for f in form %}
+    {{ f.name }}{% if not forloop.last %}, {% endif %}
+  {% empty %}
+    (vacío)
+  {% endfor %}
+</div>

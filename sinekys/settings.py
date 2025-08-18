@@ -18,7 +18,23 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1',
+]
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# SMTP Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'           # o tu proveedor
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv('G_EMAIL')  # Tu correo de Gmail
+EMAIL_HOST_PASSWORD = os.getenv('G_STANDARD_PASSWORD')  # Tu contraseña o app password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 # Application definition
@@ -44,6 +60,9 @@ INSTALLED_APPS = [
     # Providers
     'allauth.socialaccount.providers.google', 
     # 'allauth.socialaccount.providers.linkedin', 
+    
+    # Design
+    "widget_tweaks",
     
 ]
 SITE_ID = 1
@@ -164,7 +183,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 # The directory where static files are collected
 # This is used when running the collectstatic command
 STATICFILES_DIRS = [
@@ -211,3 +230,8 @@ ACCOUNT_USERNAME_BLACKLIST = [
 AUTH_USER_MODEL = 'accounts.CustomUser'
 AUTH_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.CustomSignupForm'
+
+
+
+
+

@@ -1,17 +1,94 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block title %}Sinekys - Tu aprendizaje tiende a infinito!{% endblock %}
-{% comment %} {% block extra_head %}
+{% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-{% endblock %} {% endcomment %}
+    <style>
+        body {
+            background: #0d0d0d;
+            color: #fff;
+        }
+        .landing-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 80vh;
+            padding: 40px 0 40px 0;
+        }
+        .landing-text {
+            max-width: 50%;
+        }
+        .landing-title {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 0.5em;
+            letter-spacing: 2px;
+        }
+        .landing-subtitle {
+            font-size: 2em;
+            color: #00FFAB;
+            margin-bottom: 1em;
+            font-weight: 600;
+        }
+        .landing-description {
+            font-size: 1.2em;
+            line-height: 1.7;
+            margin-bottom: 2em;
+        }
+        .landing-image {
+            max-width: 45%;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .landing-image img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.7);
+        }
+        {% comment %} *{
+                box-sizing: border-box;
+                border: 1px solid red;
+            } {% endcomment %}
+        @media (max-width: 900px) {
+            .landing-container {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 30px 0;
+            }
+            .landing-text, .landing-image {
+                max-width: 100%;
+            }
+            .landing-image {
+                margin-top: 30px;
+                justify-content: center;
+                width: 100%;
+            }
+            {% comment %} *{
+                box-sizing: border-box;
+                border: 1px solid red;
+            } {% endcomment %}
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
-    <body>
-        <div class="container">
-            <h1>Sinekys</h1>
-            <h2>Tu aprendizaje tiende a infinito!</h2>
-            <p>Sinekys es una plataforma educativa enfocada en los estudiantes
-                que buscan una mejora en su desempeño académico a través de
-                la práctica personalizada.</p>
+    <div class="landing-container" style="justify-content: center; gap:10vh;">
+        <div class="landing-text">
+            <h1 class="landing-title">Sinekys</h1>
+            <h2 class="landing-subtitle">Tu aprendizaje tiende a infinito!</h2>
+            <p class="landing-description">
+                Sinekys es una plataforma educativa enfocada en los estudiantes que buscan una mejora en su desempeño académico a través de la práctica personalizada.
+            </p>
+            <p class="landing-description" style="color: #DEA03C; font-weight: bold;">
+               <a style="color: #DEA03C; text-decoration: none;" href="{% url 'account_signup' %}"> Únete </a>
+            </p>
         </div>
-    </body>
-{% endblock%}
+        <div class="landing-image">
+            <img src="{% static 'images/NewSinekysPng.png' %}" alt="Sinekys Logo"/>
+        </div>
+    </div>
+{% endblock %}

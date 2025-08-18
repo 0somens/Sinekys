@@ -1,0 +1,15 @@
+{% comment %}
+Imprime atributos HTML extra, excepto los que se gestionan aparte
+como `class`, `type` y `tags`.
+{% endcomment %}
+{% comment %} _attrs sirve para imprimir atributos HTML adicionales en los elementos.
+como por ejemplo, si quiero añadir un atributo `data-foo`, lo haría así:
+```html
+<button data-foo="bar">Click me</button>
+```{% endcomment %}
+
+{% for name, value in attrs.items %}
+    {% if name != "class" and name != "type" and name != "tags" %}
+        {{ name }}="{{ value }}"
+    {% endif %}
+{% endfor %}

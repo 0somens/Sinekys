@@ -4,9 +4,13 @@
 {% block content%}
 
     <ul style="list-style: none; display: flex; gap: 30px; margin: 0; padding: 0;">               
-        <li><a href="{% url 'excercise' %}">Ejercicio</a></li>
+        {% comment %} <li><a href="{% url 'excercise' %}">Ejercicio</a></li>
         <li><a href="{% url 'groupMatchmaking' %}">Buscar grupo</a></li>
-        <li><a href="{% url 'continueGroupExcercise' %}">Continuar ejercicio grupal</a></li>
+        <li><a href="{% url 'continueGroupExcercise' %}">Continuar ejercicio grupal</a></li> {% endcomment %}
+
+        <li><a style="color: white; text-decoration: none;" href="#">Ejercicio</a></li>
+        <li><a style="color: white; text-decoration: none;" href="#">Buscar grupo</a></li>
+        <li><a style="color: white; text-decoration: none;" href="#">Continuar ejercicio grupal</a></li>
     </ul>
 
 

@@ -1,0 +1,69 @@
+{% extends "account/base_entrance.html" %}
+{% load allauth i18n %}
+{% block head_title %}
+    {% trans "Signup" %}
+{% endblock head_title %}
+{% block content %}
+    {% setvar link %}
+        <a href="{{ login_url }}">
+        {% endsetvar %}
+        {% setvar end_link %}
+        </a>
+    {% endsetvar %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+<style>
+    body {
+        background-color: #0d0d0d;
+        color: #fff;
+    }
+    .register-container {
+        max-width: 25rem;
+        margin: 2.5rem auto;
+        padding: 2rem 1.5rem;
+        background: #fff;
+        color: #1a1a1a;
+        border-radius: 0.75rem;
+        box-shadow: 0 0.125rem 1rem rgba(0,0,0,0.5);
+        width: 100%;
+        {% comment %} center {% endcomment %}
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    *{
+
+        border: 1px solid red;
+    }    
+    </style>
+    <div class="register-container">
+    {% if not SOCIALACCOUNT_ONLY %}
+        {% url 'account_signup' as action_url %}
+        {% element form form=form method="post" action=action_url tags="entrance,signup" %}
+            {% slot body %}
+                {% csrf_token %}
+                {% element fields form=form unlabeled=True %}
+                {% endelement %}
+                {{ redirect_field }}
+            {% endslot %}
+            {% slot actions %}
+                {% element button type="submit" tags="prominent,login" %}
+                    Registrarse
+                {% endelement %}
+            {% endslot %}
+        {% endelement %}
+    {% endif %}
+    </div>
+    {% if PASSKEY_SIGNUP_ENABLED %}
+        {% element hr %}
+        {% endelement %}
+        {% element button href=signup_by_passkey_url tags="prominent,signup,outline,primary" %}
+            {% trans "Sign up using a passkey" %}
+        {% endelement %}
+    {% endif %}
+    {% if SOCIALACCOUNT_ENABLED %}
+        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+    {% endif %}
+{% endblock content %}
